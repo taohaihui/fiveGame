@@ -14,20 +14,17 @@
 
     .rowBox {
       .box {
-        // border: 1px solid #000;
         display: inline-block;
         vertical-align: top;
         cursor: pointer;
-        // margin-top: -1px;
-        // margin-right: -1px;
         position: relative;
 
         .player {
           position: absolute;
           left: 0;
           top: 0;
-          background-color: red;
           transform: translate(-50%, -50%);
+          border-radius: 50%;
         }
       }
     }
@@ -41,6 +38,7 @@
       left: 0;
       top: 0;
       border-bottom: 1px solid #000;
+      border-right: 1px solid #000;
 
       .rows {
         border-top: 1px solid #000;
@@ -49,12 +47,11 @@
     }
 
     .tableColumns {
-      border-right: 1px solid #000;
-
       .columns {
         display: inline-block;
         border-left: 1px solid #000;
         box-sizing: border-box;
+        vertical-align: top;
       }
     }
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Box from './Box';
+import ReduxBox from './Box';
 
 export default class RowBox extends Component {
   render() {
@@ -9,10 +9,10 @@ export default class RowBox extends Component {
         {
           this.props.data.map((value, index) => {
             return (
-              <Box
+              <ReduxBox
                 key={index}
-                value={value}
-                size={this.props.size} />
+                index={this.props.startIndex + index}
+                value={value} />
             );
           })
         }
@@ -23,5 +23,5 @@ export default class RowBox extends Component {
 
 RowBox.defaultProps = {
   data: [],
-  size: []
+  startIndex: 0
 };

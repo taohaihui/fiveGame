@@ -3,23 +3,6 @@ import React, { Component } from 'react';
 import RowBox from './RowBox';
 
 export default class WrapBox extends Component {
-  constructor(props) {
-    super(props);
-
-    const [w, h] = props.box;
-
-    this.state = {
-      gameData: [
-        {
-          data: new Array(w * h).fill(null),
-          step: 0
-        }
-      ],
-      nowStep: 0,
-      nextPlayer: 'black'
-    };
-  }
-
   render() {
     return (
       <div className="wrapBox">
@@ -32,16 +15,15 @@ export default class WrapBox extends Component {
 
   renderRowBox() {
     const [w, h] = this.props.box;
-    const { gameData, nowStep } = this.state;
-    const data = gameData[nowStep].data;
+    const data = this.props.data;
     let arr = [];
 
     for (let i = 0; i < h; i++) {
       const elem = (
         <RowBox
           key={i}
-          data={data.slice(i * w, i * w + w)}
-          size={this.props.size} />
+          startIndex={i * w}
+          data={data.slice(i * w, i * w + w)} />
       );
 
       arr.push(elem);
@@ -52,6 +34,6 @@ export default class WrapBox extends Component {
 }
 
 WrapBox.defaultProps = {
-  size: 20,
-  box: [15, 15]
+  box: [0, 0],
+  data: []
 };

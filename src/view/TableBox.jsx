@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 export default class TableBox extends Component {
   render() {
+    let width = (this.props.box[0] - 1) * this.props.size;
+
     return (
       <div className="tableBox">
         <div className="tableRows">
@@ -9,7 +11,7 @@ export default class TableBox extends Component {
             this.renderLine('rows')
           }
         </div>
-        <div className="tableColumns">
+        <div className="tableColumns" style={{ width }}>
           {
             this.renderLine('columns')
           }
@@ -22,22 +24,30 @@ export default class TableBox extends Component {
     const [w, h] = this.props.box;
     const size = this.props.size;
 
+    // 渲染棋盘横线
     if (line === 'rows') {
       let wNum = w - 1;
 
-      return this.getArr(wNum).map(num => {
+      return this.getArr(h - 1).map(num => {
         return (
-          <div className="rows" style={{ width: size * (wNum), height: size }}>{num}</div>
+          <div
+            key={num}
+            className="rows"
+            style={{ width: size * wNum, height: size }}></div>
         );
       });
     }
 
+    // 渲染棋盘竖线
     if (line === 'columns') {
       let hNum = h - 1;
 
-      return this.getArr(hNum).map(num => {
+      return this.getArr(w - 1).map(num => {
         return (
-          <div className="columns" style={{ width: size, height: size * (hNum) }}>{num}</div>
+          <div
+            key={num}
+            className="columns"
+            style={{ width: size, height: size * hNum }}></div>
         );
       });
     }
@@ -55,6 +65,6 @@ export default class TableBox extends Component {
 }
 
 TableBox.defaultProps = {
-  box: [],
-  size: 20
+  box: [0, 0],
+  size: 0
 };

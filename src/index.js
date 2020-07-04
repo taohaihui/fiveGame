@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Checkerboard from './view/Checkerboard';
+import ReduxGame from './view/Game';
 import * as serviceWorker from './serviceWorker';
+
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import playGame from './reducers';
+
+let store = createStore(playGame);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Checkerboard />
+    <Provider store={store}>
+      <ReduxGame />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
