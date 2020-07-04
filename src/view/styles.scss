@@ -1,0 +1,61 @@
+.checkerboard {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #CC9966;
+  border-radius: 5px;
+
+  .wrapBox {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+
+    .rowBox {
+      .box {
+        // border: 1px solid #000;
+        display: inline-block;
+        vertical-align: top;
+        cursor: pointer;
+        // margin-top: -1px;
+        // margin-right: -1px;
+        position: relative;
+
+        .player {
+          position: absolute;
+          left: 0;
+          top: 0;
+          background-color: red;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+  }
+
+  .tableBox {
+    position: relative;
+
+    .tableRows {
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-bottom: 1px solid #000;
+
+      .rows {
+        border-top: 1px solid #000;
+        box-sizing: border-box;
+      }
+    }
+
+    .tableColumns {
+      border-right: 1px solid #000;
+
+      .columns {
+        display: inline-block;
+        border-left: 1px solid #000;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
