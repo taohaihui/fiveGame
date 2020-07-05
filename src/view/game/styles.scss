@@ -3,6 +3,8 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  display: inline-block;
+  vertical-align: top;
   padding: 20px;
   background-color: #CC9966;
   border-radius: 5px;
@@ -13,6 +15,8 @@
     top: 20px;
 
     .rowBox {
+      font-size: 0;
+
       .box {
         display: inline-block;
         vertical-align: top;

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import ReduxGame from './view/Game';
+import Frame from './view/frame/Frame';
 import * as serviceWorker from './serviceWorker';
 
 import { createStore } from 'redux';
@@ -13,7 +13,7 @@ let store = createStore(playGame);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ReduxGame />
+      <Frame />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
