@@ -4,18 +4,15 @@ import './index.css';
 import Frame from './view/frame/Frame';
 import * as serviceWorker from './serviceWorker';
 
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import playGame from './reducers';
+import configStore from './store';
 
-let store = createStore(playGame);
+const store = configStore();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <Frame />
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <Frame />
+  </Provider>,
   document.getElementById('root')
 );
 

@@ -1,6 +1,8 @@
 import * as Actions from '../actions/gameActions';
 import update from './update';
 import startGame from './startGame';
+import gameSetting from './gameSetting';
+import resetGame, { defaultSetting } from './resetGame';
 
 const initState = {
   rows: 25, //棋盘行数
@@ -12,7 +14,8 @@ const initState = {
   nowStep: 0, //游戏节点
   defaultPlayer: 'white',
   nextPlayer: 'white',
-  gameData: [] //游戏落子数据
+  gameData: [], //游戏落子数据
+  ...defaultSetting
 };
 
 initState.gameData.push({
@@ -27,7 +30,11 @@ export default function playGame(state = initState, action) {
     case Actions.start_game:
       return startGame(state, action);
     case Actions.pause_game:
-      return Object.assign({}, state, { gameStatus: action.gameStatus });
+      return { ...state, gameStatus: action.gameStatus };
+    case Actions.game_setting:
+      return gameSetting(state, action);
+    case Actions.reset_game:
+      return resetGame(state, action);
     default:
       return state
   };

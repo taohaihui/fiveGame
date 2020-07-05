@@ -43,6 +43,15 @@ class StartGame extends Component {
               onClick={this.handleStart.bind(this)}>重新开始</Button>
           )
         }
+
+        {
+          this.props.gameStatus !== 'end' && (
+            <Button
+              danger
+              size="large"
+              onClick={this.handlePause.bind(this, 'end')}>结束游戏</Button>
+          )
+        }
       </div>
     );
   }

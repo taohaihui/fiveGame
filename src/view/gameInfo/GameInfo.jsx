@@ -13,8 +13,8 @@ class GameInfo extends Component {
     };
 
     this.player = {
-      black: '黑方',
-      white: '白方'
+      black: '黑棋',
+      white: '白棋'
     };
   }
 

@@ -14,16 +14,16 @@ export default class WrapBox extends Component {
   }
 
   renderRowBox() {
-    const [w, h] = this.props.box;
+    const [columns, rows] = this.props.box;
     const data = this.props.data;
     let arr = [];
 
-    for (let i = 0; i < h; i++) {
+    for (let i = 0; i < rows; i++) {
       const elem = (
         <RowBox
           key={i}
-          startIndex={i * w}
-          data={data.slice(i * w, i * w + w)} />
+          startIndex={i * columns}
+          data={data.slice(i * columns, i * columns + columns)} />
       );
 
       arr.push(elem);

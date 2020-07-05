@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import ReduxGame from '../game/Game';
 import ReduxStartGame from '../startGame/StartGame';
 import ReduxGameInfo from '../gameInfo/GameInfo';
+import ReduxGameSetting from '../gameSetting/GameSetting';
 
 export default class Frame extends Component {
   render() {
@@ -22,7 +23,9 @@ export default class Frame extends Component {
             <ReduxStartGame />
           </div>
         </div>
-        <div className="right"></div>
+        <div className="right">
+          <ReduxGameSetting />
+        </div>
       </div>
     );
   }

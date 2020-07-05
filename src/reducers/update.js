@@ -14,7 +14,8 @@ export default function update(state, action) {
   };
   let win = getWinner(newData, action.index, state);
 
-  return Object.assign({}, state, {
+  return {
+    ...state,
     gameData: [
       ...state.gameData,
       newRecord
@@ -22,8 +23,8 @@ export default function update(state, action) {
     nowStep: prevRecord.step + 1,
     nextPlayer: player[state.nextPlayer],
     winner: win,
-    gameStatus: win ? 'end' : 'start'
-  });
+    gameStatus: win ? 'end' : state.gameStatus
+  };
 }
 
 function getWinner(data = [], index, state) {

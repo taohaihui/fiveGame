@@ -1,5 +1,6 @@
 export default function startGame(state, action) {
-  return Object.assign({}, state, {
+  return {
+    ...state,
     gameStatus: action.gameStatus,
     gameData: [
       {
@@ -9,6 +10,6 @@ export default function startGame(state, action) {
     ],
     winner: '',
     nowStep: 0,
-    nextPlayer: state.defaultPlayer,
-  });
+    nextPlayer: state.defaultPlayer
+  }
 }
