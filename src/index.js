@@ -1,13 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Checkerboard from './view/Checkerboard';
+import Frame from './view/frame/Frame';
 import * as serviceWorker from './serviceWorker';
 
+import { Provider } from 'react-redux';
+import configStore from './store';
+
+const store = configStore();
+
 ReactDOM.render(
-  <React.StrictMode>
-    <Checkerboard />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <Frame />
+  </Provider>,
   document.getElementById('root')
 );
 
