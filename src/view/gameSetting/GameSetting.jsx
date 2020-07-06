@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './styles.scss';
 import { connect } from 'react-redux';
-import { Descriptions, Input, Select, Button, message } from 'antd';
+import { Descriptions, Input, Select, Button, Modal } from 'antd';
 
-import { gameSet, resetGame } from '../../actions/gameActions';
+import { END, WHITE, BLACK } from '../../constant/game';
+import { updateSetting, resetSetting } from '../../actions/gameActions';
 
 class GameSetting extends Component {
   constructor(props) {
@@ -62,8 +63,8 @@ class GameSetting extends Component {
             <Select
               value={this.state.first}
               onChange={this.handleSelect.bind(this)}>
-              <Select.Option value="white">白棋</Select.Option>
-              <Select.Option value="black">黑棋</Select.Option>
+              <Select.Option value={WHITE}>白棋</Select.Option>
+              <Select.Option value={BLACK}>黑棋</Select.Option>
             </Select>
           </Descriptions.Item>
           <Descriptions.Item label="连续几子胜">
@@ -102,35 +103,47 @@ class GameSetting extends Component {
   }
 
   handleOk() {
-    if (this.props.gameStatus !== 'end') {
-      message.info('请先结束当前游戏');
+    if (this.props.gameStatus !== END) {
+      this.showInfo();
       return;
     }
 
     let settingData = {
-      rows: parseInt(this.state.rows),
-      columns: parseInt(this.state.columns),
-      size: parseInt(this.state.size),
+      rows: parseInt(this.state.rows, 10),
+      columns: parseInt(this.state.columns, 10),
+      size: parseInt(this.state.size, 10),
       defaultPlayer: this.state.first,
-      continuousStep: parseInt(this.state.winPremise)
+      continuousStep: parseInt(this.state.winPremise, 10)
     };
 
-    this.props.dispatch(gameSet(settingData));
+    this.props.dispatch(updateSetting(settingData));
   }
 
   handleReset() {
-    this.props.dispatch(resetGame());
+    if (this.props.gameStatus !== END) {
+      this.showInfo();
+      return;
+    }
+
+    this.props.dispatch(resetSetting());
+  }
+
+  showInfo() {
+    Modal.info({ title: '请先结束当前游戏', okText: '好的' });
   }
 }
 
 const mapStateToProps = state => {
+  const { rows, columns, size, defaultPlayer, continuousStep } = state.setting;
+  const { gameStatus } = state.status;
+
   return {
-    rows: state.rows,
-    columns: state.columns,
-    size: state.size,
-    first: state.defaultPlayer,
-    winPremise: state.continuousStep,
-    gameStatus: state.gameStatus
+    rows,
+    columns,
+    size,
+    first: defaultPlayer,
+    winPremise: continuousStep,
+    gameStatus
   };
 };
 

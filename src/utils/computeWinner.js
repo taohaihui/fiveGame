@@ -1,34 +1,5 @@
-export default function update(state, action) {
-  let prevRecord = state.gameData[state.gameData.length - 1]
-  let newData = [...prevRecord.data];
-
-  newData[action.index] = state.nextPlayer;
-
-  let newRecord = {
-    data: newData,
-    step: prevRecord.step + 1
-  };
-  const player = {
-    white: 'black',
-    black: 'white'
-  };
-  let win = getWinner(newData, action.index, state);
-
-  return {
-    ...state,
-    gameData: [
-      ...state.gameData,
-      newRecord
-    ],
-    nowStep: prevRecord.step + 1,
-    nextPlayer: player[state.nextPlayer],
-    winner: win,
-    gameStatus: win ? 'end' : state.gameStatus
-  };
-}
-
-function getWinner(data = [], index, state) {
-  const { columns } = state;
+export default function getWinner(data = [], index, state) {
+  const { columns } = state.setting;
   let position = {
     x: index % columns,
     y: Math.floor(index / columns)
@@ -36,10 +7,10 @@ function getWinner(data = [], index, state) {
   let player = data[index];
   let winner = '';
 
-  winner = winner || getXWin(data, player, position, state);
-  winner = winner || getYWin(data, player, position, state);
-  winner = winner || getXYWin(data, player, position, state);
-  winner = winner || getYXWin(data, player, position, state);
+  winner = winner || getXWin(data, player, position, state.setting);
+  winner = winner || getYWin(data, player, position, state.setting);
+  winner = winner || getXYWin(data, player, position, state.setting);
+  winner = winner || getYXWin(data, player, position, state.setting);
 
   return winner;
 }
@@ -187,4 +158,3 @@ function getYXWin(data, player, { x, y }, { rows, columns, continuousStep }) {
 
   return '';
 }
-

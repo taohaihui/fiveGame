@@ -39,12 +39,13 @@ class GameInfo extends Component {
 }
 
 const mapStateToProps = state => {
+  const { gameStatus, nowStep, nextPlayer, winner } = state.status;
   return {
-    gameStatus: state.gameStatus,
-    nowStep: state.nowStep,
-    nextPlayer: state.nextPlayer,
-    winner: state.winner
+    gameStatus,
+    nowStep,
+    nextPlayer,
+    winner
   };
-}
+};
 
 export default connect(mapStateToProps)(GameInfo);

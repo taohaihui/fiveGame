@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { playChess } from '../../actions/gameActions';
+import { START } from '../../constant/game';
+import { updateData } from '../../actions/gameActions';
 
 class Box extends Component {
   constructor(props) {
@@ -34,24 +35,26 @@ class Box extends Component {
 
   handlePlay() {
     // 不能重复落子在同一个位置
-    if (this.props.value || this.props.gameStatus !== 'start') {
+    if (this.props.value || this.props.gameStatus !== START) {
       return;
     }
 
-    this.props.dispatch(playChess(this.props.index));
+    this.props.dispatch(updateData(this.props.index));
   }
 }
 
 Box.defaultProps = {
   value: null,
-  index: 0,
-  size: 0
+  index: 0
 };
 
 const mapStateToProps = state => {
+  const { size } = state.setting;
+  const { gameStatus } = state.status;
+
   return {
-    size: state.size,
-    gameStatus: state.gameStatus
+    size,
+    gameStatus
   };
 };
 

@@ -17,7 +17,7 @@ export default class TableBox extends Component {
           }
         </div>
       </div>
-    )
+    );
   }
 
   renderLine(line) {

@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import { Button } from 'antd';
 import './styles.scss';
 
-import { startGame, pauseGame } from '../../actions/gameActions';
+import { START, PAUSE, END } from '../../constant/game';
+import { resetStatus, pauseOrContinueGame } from '../../actions/gameActions';
 
 class StartGame extends Component {
   render() {
     return (
       <div className="startGame">
         {
-          this.props.gameStatus === 'end' && (
+          this.props.gameStatus === END && (
             <Button
               type="primary"
               size="large"
@@ -19,24 +20,24 @@ class StartGame extends Component {
         }
 
         {
-          this.props.gameStatus === 'start' && (
+          this.props.gameStatus === START && (
             <Button
               type="primary"
               size="large"
-              onClick={this.handlePause.bind(this, 'pause')}>暂停</Button>
+              onClick={this.handlePause.bind(this, PAUSE)}>暂停</Button>
           )
         }
         {
-          this.props.gameStatus === 'pause' && (
+          this.props.gameStatus === PAUSE && (
             <Button
               type="primary"
               size="large"
-              onClick={this.handlePause.bind(this, 'start')}>继续</Button>
+              onClick={this.handlePause.bind(this, START)}>继续</Button>
           )
         }
 
         {
-          this.props.gameStatus === 'start' && (
+          this.props.gameStatus === START && (
             <Button
               danger
               size="large"
@@ -45,11 +46,11 @@ class StartGame extends Component {
         }
 
         {
-          this.props.gameStatus !== 'end' && (
+          this.props.gameStatus !== END && (
             <Button
               danger
               size="large"
-              onClick={this.handlePause.bind(this, 'end')}>结束游戏</Button>
+              onClick={this.handlePause.bind(this, END)}>结束游戏</Button>
           )
         }
       </div>
@@ -57,17 +58,19 @@ class StartGame extends Component {
   }
 
   handleStart() {
-    this.props.dispatch(startGame('start'));
+    this.props.dispatch(resetStatus(START));
   }
 
   handlePause(status) {
-    this.props.dispatch(pauseGame(status));
+    this.props.dispatch(pauseOrContinueGame(status));
   }
 }
 
 const mapStateToProps = state => {
+  const { gameStatus } = state.status;
+
   return {
-    gameStatus: state.gameStatus
+    gameStatus
   };
 };
 

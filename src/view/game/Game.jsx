@@ -21,10 +21,12 @@ class Game extends Component {
 }
 
 const mapStateToProps = state => {
+  const { size, rows, columns } = state.setting;
+  const { nowStep } = state.status;
   return {
-    size: state.size,
-    box: [state.columns, state.rows],
-    lastRecord: state.gameData[state.nowStep]
+    size,
+    box: [columns, rows],
+    lastRecord: state.gameData[nowStep]
   };
 };
 

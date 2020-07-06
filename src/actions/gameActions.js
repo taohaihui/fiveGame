@@ -1,49 +1,107 @@
 
-export const play_chess = 'play_chess';
-export const start_game = 'start_game';
-export const pause_game = 'pause_game';
-export const game_setting = 'game_setting';
-export const reset_game = 'reset_game';
+import * as ActionConst from '../constant/actionType';
+import { END, WHITE, BLACK } from '../constant/game';
+import getWinner from '../utils/computeWinner';
 
-// 落下一颗棋子
-export function playChess(index) {
-  return {
-    type: play_chess,
-    dec: '落子更新游戏数据',
-    index
+export function resetStatus(status) {
+  return (dispatch, getState) => {
+    const action = {
+      type: ActionConst.reset_status,
+      dec: '重置游戏状态',
+      gameStatus: status,
+      nextPlayer: getState().setting.defaultPlayer
+    };
+
+    dispatch(action);
+    return dispatch(resetData());
   };
 }
 
-// 开始游戏
-export function startGame() {
-  return {
-    type: start_game,
-    dec: '开始游戏',
-    gameStatus: 'start'
+export function resetData() {
+  return (dispatch, getState) => {
+    const { rows, columns } = getState().setting;
+
+    const action = {
+      type: ActionConst.reset_data,
+      dec: '清空游戏数据',
+      rows,
+      columns
+    };
+
+    return dispatch(action);
   };
 }
 
-// 暂停游戏
-export function pauseGame(status) {
+export function updateData(index) {
+  return (dispatch, getState) => {
+    const { nextPlayer } = getState().status;
+
+    const action = {
+      type: ActionConst.update_data,
+      dec: '更新游戏数据',
+      index,
+      player: nextPlayer
+    };
+
+    dispatch(action);
+    return dispatch(updateStatus(index));
+  };
+}
+
+export function updateStatus(index) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const { nextPlayer } = state.status;
+    const newData = state.gameData[state.gameData.length - 1];
+    const player = {
+      [WHITE]: BLACK,
+      [BLACK]: WHITE
+    };
+
+    const winner = getWinner(newData.data, index, state);
+
+    const action = {
+      type: ActionConst.update_status,
+      dec: '更新游戏状态',
+      nowStep: newData.step,
+      nextPlayer: player[nextPlayer],
+      winner,
+      gameStatus: winner ? END : state.status.gameStatus
+    };
+
+    return dispatch(action);
+  };
+}
+
+export function updateSetting(settingData) {
+  return (dispatch, getState) => {
+    const action = {
+      type: ActionConst.update_setting,
+      dec: '更改游戏设置',
+      settingData
+    };
+
+    dispatch(action);
+    dispatch(resetStatus(END));
+  };
+}
+
+export function resetSetting() {
+  return (dispatch, getState) => {
+    const action = {
+      type: ActionConst.reset_setting,
+      dec: '恢复游戏默认设置'
+    };
+
+    dispatch(action);
+    dispatch(resetStatus(END));
+  };
+}
+
+export function pauseOrContinueGame(status) {
   return {
-    type: pause_game,
+    type: ActionConst.change_gameStatus,
     dec: '暂停或继续游戏',
     gameStatus: status
-  };
-}
-
-// 游戏设置
-export function gameSet(settingData) {
-  return {
-    type: game_setting,
-    dec: '更改游戏设置',
-    settingData
-  };
-}
-
-export function resetGame() {
-  return {
-    type: reset_game,
-    dec: '恢复默认设置'
   };
 }

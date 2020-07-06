@@ -1,0 +1,24 @@
+{
+  "extends": [
+    ".eslintrc.dev.json"
+  ],
+  "rules": {
+    "no-multiple-empty-lines": [
+      "error",
+      {
+        "max": 1
+      }
+    ],
+    "no-console": [
+      "warn",
+      {
+        "allow": [
+          "error"
+        ]
+      }
+    ],
+    "no-debugger": "error",
+    "no-alert": "error",
+    "no-eval": "error"
+  }
+}

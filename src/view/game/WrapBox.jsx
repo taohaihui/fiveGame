@@ -10,7 +10,7 @@ export default class WrapBox extends Component {
           this.renderRowBox()
         }
       </div>
-    )
+    );
   }
 
   renderRowBox() {
