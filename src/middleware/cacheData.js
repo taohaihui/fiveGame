@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { message } from 'antd';
 
 import { reset_status, update_status, change_status } from '../constant/actionType';
 import { START, END, HISTORY_KEY } from '../constant/game';
@@ -38,7 +39,12 @@ export default function cacheData(store) {
         startTime = '';
         endTime = '';
 
-        setLocal(HISTORY_KEY, [...historyData, obj]);
+        try {
+          setLocal(HISTORY_KEY, [...historyData, obj]);
+        } catch (e) {
+          message.error('缓存历史数据出错');
+        }
+
         store.dispatch(refreshHistoryData());
       }
     }
