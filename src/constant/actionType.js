@@ -6,5 +6,6 @@ export const update_status = 'update_status';
 
 export const update_setting = 'update_setting';
 export const reset_setting = 'reset_setting';
-export const change_gameStatus = 'change_gameStatus';
+export const change_status = 'change_status';
+export const refresh_history = 'refresh_history';
 

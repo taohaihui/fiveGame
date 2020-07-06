@@ -6,12 +6,15 @@ import ReduxGame from '../game/Game';
 import ReduxStartGame from '../startGame/StartGame';
 import ReduxGameInfo from '../gameInfo/GameInfo';
 import ReduxGameSetting from '../gameSetting/GameSetting';
+import ReduxHistoryData from '../historyData/HistoryData';
 
 export default class Frame extends Component {
   render() {
     return (
       <div className="frame">
-        <div className="left"></div>
+        <div className="left">
+          <ReduxHistoryData />
+        </div>
         <div className="center">
           <div className="centerTop">
             <ReduxGameInfo />

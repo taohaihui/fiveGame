@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import setting from './setting';
 import status from './status';
 import gameData from './gameData';
+import historyData from './historyData';
 
 // export default function games(state = {}, action) {
 //   return {
@@ -15,7 +16,8 @@ import gameData from './gameData';
 const games = combineReducers({
   setting,
   status,
-  gameData
+  gameData,
+  historyData
 });
 
 export default games;

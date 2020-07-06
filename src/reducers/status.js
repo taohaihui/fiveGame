@@ -26,7 +26,7 @@ export default function status(state = initState, action) {
         winner: action.winner,
         nowStep: action.nowStep
       };
-    case ActionConst.change_gameStatus:
+    case ActionConst.change_status:
       return {
         ...state,
         gameStatus: action.gameStatus

@@ -4,6 +4,7 @@ export const BLACK = 'black';
 export const START = 'start';
 export const PAUSE = 'pause';
 export const END = 'end';
+export const HISTORY_KEY = 'historyData';
 
 export const DEFAULT_SETTING = {
   rows: 25, //棋盘行数

@@ -13,7 +13,7 @@ export function resetStatus(status) {
     };
 
     dispatch(action);
-    return dispatch(resetData());
+    dispatch(resetData());
   };
 }
 
@@ -28,7 +28,7 @@ export function resetData() {
       columns
     };
 
-    return dispatch(action);
+    dispatch(action);
   };
 }
 
@@ -44,7 +44,7 @@ export function updateData(index) {
     };
 
     dispatch(action);
-    return dispatch(updateStatus(index));
+    dispatch(updateStatus(index));
   };
 }
 
@@ -69,7 +69,7 @@ export function updateStatus(index) {
       gameStatus: winner ? END : state.status.gameStatus
     };
 
-    return dispatch(action);
+    dispatch(action);
   };
 }
 
@@ -100,8 +100,15 @@ export function resetSetting() {
 
 export function pauseOrContinueGame(status) {
   return {
-    type: ActionConst.change_gameStatus,
+    type: ActionConst.change_status,
     dec: '暂停或继续游戏',
     gameStatus: status
+  };
+}
+
+export function refreshHistoryData() {
+  return {
+    type: ActionConst.refresh_history,
+    dec: '刷新历史数据'
   };
 }
